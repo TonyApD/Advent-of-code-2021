@@ -1,45 +1,42 @@
 package day1
 
-import java.io.File
+import readLinesFromFile
 
-fun main(args: Array<String>) {
-    val lines = readLinesFromFile("day1");
+fun main() {
+    val lines = readLinesFromFile("day1")
     val measurements = lines.map { it.toInt() }
 
-    println("Part 1:");
-    println(countIncreasedMeasurementsPart1(measurements));
+    println("Part 1:")
+    println(countIncreasedMeasurementsPart1(measurements))
 
-    println("Part 2:");
-    println(countIncreasedMeasurementsPart2(measurements));
+    println("Part 2:")
+    println(countIncreasedMeasurementsPart2(measurements))
 }
 
-fun readLinesFromFile(dayName: String): List<String>
-        = File("src/main/kotlin/$dayName", "$dayName.txt").readLines()
-
 fun countIncreasedMeasurementsPart1(measurements: List<Int>):Int {
-    var higherMeasurements = 0;
-    var previousMeasurement = 0;
+    var higherMeasurements = 0
+    var previousMeasurement = 0
     for ((index, measurement) in measurements.withIndex()) {
         if (index > 0 && measurement > previousMeasurement) {
-            higherMeasurements++;
+            higherMeasurements++
         }
-        previousMeasurement = measurement;
+        previousMeasurement = measurement
     }
-    return higherMeasurements;
+    return higherMeasurements
 }
 
 fun countIncreasedMeasurementsPart2(measurements: List<Int>):Int {
-    var higherMeasurements = 0;
-    var previousMeasurement = 0;
+    var higherMeasurements = 0
+    var previousMeasurement = 0
 
     for (index in measurements.indices) {
-        if (index + 3 > measurements.count()) break;
+        if (index + 3 > measurements.count()) break
 
-        val windowSum = measurements.subList(index, index + 3).sum();
+        val windowSum = measurements.subList(index, index + 3).sum()
         if (index > 0 && windowSum > previousMeasurement) {
-            higherMeasurements++;
+            higherMeasurements++
         }
-        previousMeasurement = windowSum;
+        previousMeasurement = windowSum
     }
-    return higherMeasurements;
+    return higherMeasurements
 }

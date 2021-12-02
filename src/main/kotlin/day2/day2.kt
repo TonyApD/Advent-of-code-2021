@@ -1,6 +1,6 @@
 package day2
 
-import java.io.File
+import readLinesFromFile
 
 fun main() {
     val lines = readLinesFromFile("day2")
@@ -12,9 +12,6 @@ fun main() {
     println("Part 2:")
     println(part2(commands))
 }
-
-fun readLinesFromFile(dayName: String): List<String>
-        = File("src/main/kotlin/$dayName", "$dayName.txt").readLines()
 
 fun part1(commands: List<Command>): Int {
     var depth = 0
