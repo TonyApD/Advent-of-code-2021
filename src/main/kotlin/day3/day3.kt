@@ -4,7 +4,7 @@ import readLinesFromFile
 
 fun main() {
     val lines = readLinesFromFile("day3")
-    var reportUnits = lines.map { it.toCharArray() }
+    val reportUnits = lines.map { it.toCharArray() }
 
     println("Part 1:")
     println(part1(reportUnits))
@@ -19,12 +19,12 @@ fun part1(report: List<CharArray>): Int {
 
     val amountOfChars = report.first()
     for (position in amountOfChars.indices) {
-        val reportRow = report.map { it.get(position) }
+        val reportRow = report.map { it[position] }
             .groupBy { it }
             .toSortedMap()
             .map { it.value.count() }
 
-        if (reportRow.get(0) > reportRow.get(1)) {
+        if (reportRow[0] > reportRow[1]) {
             gammaRate += '0'
             epsilonRate += '1'
         } else {
@@ -42,22 +42,22 @@ fun part2(report: List<String>): Int {
     val amountOfChars = report.first()
     for (position in amountOfChars.indices) {
         // Oxygen
-        val mostCommonDigit = oxygenRatingLines.map { it.get(position) }
+        val mostCommonDigit = oxygenRatingLines.map { it[position] }
             .groupingBy { it }
             .eachCount()
             .toSortedMap(compareByDescending { it })
             .maxByOrNull { it.value }
 
-        oxygenRatingLines = oxygenRatingLines.filter { it.get(position) == mostCommonDigit?.key }
+        oxygenRatingLines = oxygenRatingLines.filter { it[position] == mostCommonDigit?.key }
 
         // CO2
-        val leastCommonDigit = co2ScrubberLines.map { it.get(position) }
+        val leastCommonDigit = co2ScrubberLines.map { it[position] }
             .groupingBy { it }
             .eachCount()
             .toSortedMap()
             .minByOrNull { it.value }
 
-        co2ScrubberLines = co2ScrubberLines.filter { it.get(position) == leastCommonDigit?.key }
+        co2ScrubberLines = co2ScrubberLines.filter { it[position] == leastCommonDigit?.key }
     }
 
     return oxygenRatingLines.single().toCharArray().binaryToInt() * co2ScrubberLines.single().toCharArray().binaryToInt()
